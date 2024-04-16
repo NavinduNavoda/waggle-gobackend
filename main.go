@@ -1,9 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"github.com/NavinduNavoda/waggle-gobackend/data"
+	"github.com/NavinduNavoda/waggle-gobackend/server"
+)
 
 
 func main() {
+
+	dbinfo, err := data.ReadDBInfoFromFile()
+
+	if err != nil {
+		panic(err)
+	}
 	
-	fmt.Println("pakaya")
+	server := server.NewServer(dbinfo)
+	
+	server.Run(":5000")
+
 }
